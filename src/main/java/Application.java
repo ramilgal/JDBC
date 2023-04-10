@@ -1,7 +1,15 @@
+import model.City;
+import model.Employee;
+import service.EmployeeDAO;
+import service.EmployeeDaoImpl;
+
 import java.sql.*;
 public class Application {
     public static void main(String[] args) {
-
+        City city1 = new City(3);
+        Employee employee1 = new Employee(6, "Petr", "Gerasimov", "Male", 55, city1);
+        EmployeeDAO employeeDAO = new EmployeeDaoImpl();
+        employeeDAO.add(employee1);
         final String user = "postgres";
         final String password = "123654";
         final String url = "jdbc:postgresql://localhost:5432/skypro";
@@ -9,7 +17,7 @@ public class Application {
         try (final Connection connection =
                      DriverManager.getConnection(url, user, password);
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM employee WHERE id=(2)")) {
+                     connection.prepareStatement("SELECT * FROM employee WHERE id=(7)")) {
             ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
                 int idOfEmployee = resultSet.getInt("id");

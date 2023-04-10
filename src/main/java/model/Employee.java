@@ -17,6 +17,10 @@ public class Employee {
         this.city = city;
     }
 
+    public Employee() {
+
+    }
+
     public int getId() {
         return id;
     }
