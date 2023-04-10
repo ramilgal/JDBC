@@ -6,18 +6,21 @@ import service.EmployeeDaoImpl;
 import java.sql.*;
 public class Application {
     public static void main(String[] args) {
-        City city1 = new City(3);
-        Employee employee1 = new Employee(6, "Petr", "Gerasimov", "Male", 55, city1);
-        EmployeeDAO employeeDAO = new EmployeeDaoImpl();
-        employeeDAO.add(employee1);
+
         final String user = "postgres";
         final String password = "123654";
         final String url = "jdbc:postgresql://localhost:5432/skypro";
 
+        City city1 = new City(3);
+        Employee employee1 = new Employee(9, "Petr", "Gerasimov", "Male", 55, city1);
+        EmployeeDAO employeeDAO = new EmployeeDaoImpl();
+        //Добавить сотрудника:
+        employeeDAO.add(employee1);
+
         try (final Connection connection =
                      DriverManager.getConnection(url, user, password);
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM employee WHERE id=(7)")) {
+                     connection.prepareStatement("SELECT * FROM employee WHERE id=(6)")) {
             ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
                 int idOfEmployee = resultSet.getInt("id");
@@ -39,6 +42,17 @@ public class Application {
             System.out.println("Ошибка при подключении к базе данных!");
             e.printStackTrace();
         }
+
+        employeeDAO.getAllEmployee();
+        System.out.println("---------------");
+        //удалить сотрудника:
+        employeeDAO.deleteEmployee(7);
+        employeeDAO.getAllEmployee();
+        System.out.println("---------------");
+        employeeDAO.updateEmployee(1,employee1);
+        employeeDAO.getAllEmployee();
+        System.out.println("---------------");
+        employeeDAO.getById(5);
     }
 
 }

@@ -71,13 +71,13 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Сотрудник: " +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
                 ", city=" + city +
-                '}';
+                ';';
     }
 }

@@ -48,6 +48,7 @@ public class EmployeeDaoImpl implements EmployeeDAO {
                 employee.setAge(resultSet.getInt(5));
                 employee.setCity(new City(resultSet.getInt("city_id"), resultSet.getString("city_name")));
             }
+            System.out.println(employee);
         } catch (SQLException e) {
             e.printStackTrace();
         } return employee;
@@ -69,6 +70,9 @@ public class EmployeeDaoImpl implements EmployeeDAO {
                 City city = new City(resultSet.getInt("city_id"), resultSet.getString("city_name"));
                 employees.add(new Employee(id, first_name, last_name, gender, age, city));
             }
+            for (Employee printEmployees:employees) {
+                System.out.println(printEmployees);}
+
         } catch (SQLException e) {
             e.printStackTrace();
         } return employees;
