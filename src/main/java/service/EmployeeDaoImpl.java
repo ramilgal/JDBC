@@ -7,69 +7,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDAO {
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+//    EntityTransaction transaction = entityManager.getTransaction();
     @Override
     public void add(Employee employee) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(employee);
-        entityManager.flush();
-        entityManager.getTransaction().commit();
-        printAllEmployees(entityManager);
-        entityManager.close();
-        entityManagerFactory.close();
+
+//        transaction.begin();
+        entityManager.persist(employee); // Как работает persist ???
+//        entityManager.flush();
+//        transaction.commit();
+//        printAllEmployees(entityManager);
+//        entityManager.close();
+//        entityManagerFactory.close();
     }
     @Override
     public Employee getById(int id) {
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-             Employee employee1 = entityManager.find(Employee.class, id);
+            Employee employee1 = entityManager.find(Employee.class, id);
              System.out.println(employee1);
-             entityManager.close();
-             entityManagerFactory.close();
         return employee1;
     }
     @Override
     public List<Employee> getAllEmployee() {
         List<Employee> employees = new ArrayList<>();
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.getTransaction().commit();
         printAllEmployees(entityManager);
-        entityManager.close();
-        entityManagerFactory.close();
         return employees;
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
 
-        entityManager.merge(employee);//проблема здесь
 
-        entityManager.flush();
-        printAllEmployees(entityManager);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        entityManagerFactory.close();
+        entityManager.merge(employee);//проблема здесь, как работает merge ?
+
     }
 
     @Override
     public void deleteEmployee(Employee employee) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
 
-        entityManager.remove(employee);//проблема здесь
+        entityManager.remove(employee);//проблема здесь, как работает remove???
 
-        entityManager.flush();
-        printAllEmployees(entityManager);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        entityManagerFactory.close();
     }
     public static void printAllEmployees(EntityManager entityManager) {
         TypedQuery<Employee> query = entityManager.createQuery("from Employee", Employee.class);
