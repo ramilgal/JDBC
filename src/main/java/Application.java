@@ -28,9 +28,9 @@ public class Application {
             employeeTest.setFirst_name("New test");
             employeeDAO.updateEmployee(employeeTest);//проблема здесь
         employeeDAO.getAllEmployee();
-//            System.out.println("Удалить сотрудника: ");
-//        employeeDAO.deleteEmployee(employee1);//проблема здесь
-//        employeeDAO.getAllEmployee();
+            System.out.println("Удалить сотрудника: ");
+        employeeDAO.deleteEmployee(employeeTest);//проблема здесь
+        employeeDAO.getAllEmployee();
             entityManager.close();
             entityManagerFactory.close();
     }
