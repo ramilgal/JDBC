@@ -29,7 +29,7 @@ public class Application {
             employeeDAO.updateEmployee(employeeTest);//проблема здесь
         employeeDAO.getAllEmployee();
             System.out.println("Удалить сотрудника: ");
-        employeeDAO.deleteEmployee(employeeTest);//проблема здесь
+        employeeDAO.deleteEmployee(employeeDAO.getById(3));//проблема здесь
         employeeDAO.getAllEmployee();
             entityManager.close();
             entityManagerFactory.close();
