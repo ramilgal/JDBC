@@ -9,17 +9,14 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDAO {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistenceUnit");
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-//    EntityTransaction transaction = entityManager.getTransaction();
+    EntityTransaction transaction = entityManager.getTransaction();
     @Override
-    public void add(Employee employee) {
+    public Employee add(Employee employee) {
 
-//        transaction.begin();
-        entityManager.persist(employee); // Как работает persist ???
-//        entityManager.flush();
-//        transaction.commit();
-//        printAllEmployees(entityManager);
-//        entityManager.close();
-//        entityManagerFactory.close();
+        transaction.begin();
+        entityManager.persist(employee);
+        transaction.commit();
+        return employee;
     }
     @Override
     public Employee getById(int id) {
@@ -37,16 +34,16 @@ public class EmployeeDaoImpl implements EmployeeDAO {
     @Override
     public void updateEmployee(Employee employee) {
 
-
-        entityManager.merge(employee);//проблема здесь, как работает merge ?
-
+        transaction.begin();
+        entityManager.merge(employee);//проблема здесь, добавляет нового employee
+        transaction.commit();
     }
 
     @Override
     public void deleteEmployee(Employee employee) {
-
-        entityManager.remove(employee);//проблема здесь, как работает remove???
-
+        transaction.begin();
+        entityManager.remove(employee);//проблема здесь, не удаляет employee
+        transaction.commit();
     }
     public static void printAllEmployees(EntityManager entityManager) {
         TypedQuery<Employee> query = entityManager.createQuery("from Employee", Employee.class);
