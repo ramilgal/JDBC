@@ -45,6 +45,14 @@ public class City {
         this.city_name = city_name;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public String toString() {
         return "City{" +
