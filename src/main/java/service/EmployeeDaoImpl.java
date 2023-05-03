@@ -35,14 +35,14 @@ public class EmployeeDaoImpl implements EmployeeDAO {
     public void updateEmployee(Employee employee) {
 
         transaction.begin();
-        entityManager.merge(employee);//проблема здесь, добавляет нового employee
+        entityManager.merge(employee);
         transaction.commit();
     }
 
     @Override
     public void deleteEmployee(Employee employee) {
         transaction.begin();
-        entityManager.remove(employee);//проблема здесь, не удаляет employee
+        entityManager.remove(employee);
         transaction.commit();
     }
     public static void printAllEmployees(EntityManager entityManager) {

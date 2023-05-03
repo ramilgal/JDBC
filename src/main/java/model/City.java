@@ -1,16 +1,32 @@
 package model;
 
-public class City {
-    private int city_id;
-    private String city_name;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
-    public City(int city_id, String city_name) {
-        this.city_id = city_id;
+@Entity
+@Table(name="city")
+public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int city_id;
+    @Column(name="city_name")
+    private String city_name;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employees;
+    public City(
+//            int city_id,
+            String city_name) {
+//        this.city_id = city_id;
         this.city_name = city_name;
     }
 
     public City(int city_id) {
         this.city_id = city_id;
+    }
+
+    public City() {
+
     }
 
     public int getCity_id() {
@@ -29,11 +45,32 @@ public class City {
         this.city_name = city_name;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public String toString() {
         return "City{" +
                 "city_id=" + city_id +
                 ", city_name='" + city_name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return city_id == city.city_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city_id);
     }
 }
