@@ -35,19 +35,19 @@ public class Application {
 
 
             //удаляю city по id 1
-            cityDAO.deleteCity(cityDAO.getCityById(1));
+//            cityDAO.deleteCity(cityDAO.getCityById(1));
             //проверяю список city:
             cityDAO.getAllCites();
-            employeeDAO.getAllEmployee();
+//            employeeDAO.getAllEmployee();
 //
 //            Employee employeeTest = employeeDAO.add(employee2);
 //            employeeTest.setFirst_name("New test");
 //            employeeDAO.updateEmployee(employeeTest);
 //        employeeDAO.getAllEmployee();
-            System.out.println("Удалить сотрудника: ");
-        employeeDAO.deleteEmployee(employeeDAO.getById(29));
-        //проверяю список после удаления:
-        employeeDAO.getAllEmployee();
+//            System.out.println("Удалить сотрудника: ");
+//        employeeDAO.deleteEmployee(employeeDAO.getById(29));
+//        проверяю список после удаления:
+//        employeeDAO.getAllEmployee();
 
             //В итоге придобавлении сотрудника добавляется новый city, далее при удалении сотрудника, связанный город
             //удаляется, при удалении города, также удалились все сотрудники с указанным этим городом
